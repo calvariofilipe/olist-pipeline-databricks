@@ -74,6 +74,19 @@ As relações principais ligam `orders` a `customers`, `order_items` a `orders`,
 
 O [catálogo de dados](./04_catálogo_dados.ipynb) documenta as **19 tabelas e 158 campos**, contando as ocorrências dos campos em cada tabela. Inclui significados, tipos reais, domínios esperados, chaves, fórmulas e linhagem. As descrições também foram registradas nas tabelas e colunas do catálogo do Databricks.
 
+### Documentação no Databricks
+
+As capturas abaixo exemplificam a documentação da tabela
+`olist_mvp.gold.vendas_por_categoria` no catálogo do Databricks.
+
+![Descrição da tabela vendas_por_categoria](catalogo_gold_descricao.png)
+
+*Descrição da tabela, origem dos dados e critérios dos indicadores.*
+
+![Documentação das colunas da tabela vendas_por_categoria](catalogo_gold_colunas.png)
+
+*Definições das cinco colunas e observações sobre o cálculo dos indicadores.*
+
 ## 4. Pipeline de Dados
 
 | Etapa | Responsabilidade | Notebook |
@@ -113,19 +126,6 @@ O processamento utiliza PySpark e Delta; os gráficos utilizam pandas e Matplotl
 Os resultados registrados nos notebooks correspondem à base utilizada no projeto. Reexecuções atualizam os metadados temporais; mudanças nos arquivos de origem podem alterar os indicadores. Após recriar as tabelas, o notebook de catálogo deve ser executado novamente para aplicar as descrições.
 
 Referências técnicas: [volumes no Unity Catalog](https://docs.databricks.com/aws/en/volumes/unstructured-data-tutorial) e [comentários em tabelas e colunas](https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-ddl-comment).
-
-### Documentação no Databricks
-
-As capturas abaixo exemplificam a documentação da tabela
-`olist_mvp.gold.vendas_por_categoria` no catálogo do Databricks.
-
-![Descrição da tabela vendas_por_categoria](catalogo_gold_descricao.png)
-
-*Descrição da tabela, origem dos dados e critérios dos indicadores.*
-
-![Documentação das colunas da tabela vendas_por_categoria](catalogo_gold_colunas.png)
-
-*Definições das cinco colunas e observações sobre o cálculo dos indicadores.*
 
 ## 5. Qualidade de Dados
 
