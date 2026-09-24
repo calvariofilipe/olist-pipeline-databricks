@@ -114,6 +114,19 @@ Os resultados registrados nos notebooks correspondem à base utilizada no projet
 
 Referências técnicas: [volumes no Unity Catalog](https://docs.databricks.com/aws/en/volumes/unstructured-data-tutorial) e [comentários em tabelas e colunas](https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-ddl-comment).
 
+### Documentação no Databricks
+
+As capturas abaixo exemplificam a documentação da tabela
+`olist_mvp.gold.vendas_por_categoria` no catálogo do Databricks.
+
+![Descrição da tabela vendas_por_categoria](catalogo_gold_descricao.png)
+
+*Descrição da tabela, origem dos dados e critérios dos indicadores.*
+
+![Documentação das colunas da tabela vendas_por_categoria](catalogo_gold_colunas.png)
+
+*Definições das cinco colunas e observações sobre o cálculo dos indicadores.*
+
 ## 5. Qualidade de Dados
 
 O diagnóstico distingue ausência de informação, duplicidade, inconsistência e valor atípico. As contagens por regra podem se sobrepor e não devem ser somadas como se representassem registros distintos.
