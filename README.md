@@ -208,10 +208,10 @@ Uma das principais dificuldades foi definir critérios de tratamento que permiti
 
 A abordagem adotada foi preservar os dados de origem na Bronze, aplicar padronizações e conversões na Silver e explicitar os critérios de inclusão nas análises da Gold. Esse processo reforçou que identificar uma inconsistência não implica necessariamente excluir o registro: a decisão depende da finalidade da análise.
 
+O projeto estabeleceu uma conexão com minha experiência profissional na [LiveCoinWatch](https://www.livecoinwatch.com/), onde trabalho com preparação e validação de dados, métricas e apresentação de resultados. Embora o contexto de negócio seja diferente, ambas as atividades exigem compreender as fontes, conferir a consistência das informações e comunicar os indicadores com clareza. Neste MVP, aprofundei essas práticas ao organizar o processamento em camadas, utilizando PySpark, tabelas Delta e documentação no Databricks. Foram utilizados exclusivamente os dados públicos da Olist, sem informações internas da empresa.
+
 Outro desafio foi organizar os notebooks de modo que código, resultados e interpretação formassem uma sequência clara. Considerando o feedback do MVP anterior, a estrutura foi revisada para separar etapas com responsabilidades distintas e apresentar as interpretações próximas às respectivas visualizações.
 
-Entre os principais aprendizados, destaco a importância de compreender a granularidade das tabelas antes de realizar junções. A agregação de itens e avaliações por pedido evitou a multiplicação de valores e a atribuição de pesos diferentes aos pedidos nos indicadores correspondentes.
+Entre os principais aprendizados, destaco a importância de compreender a granularidade das tabelas antes de realizar junções. A agregação de itens e avaliações por pedido evitou a multiplicação de valores e a atribuição de pesos diferentes aos pedidos nos indicadores correspondentes. Esse cuidado também é relevante no trabalho com métricas profissionais, em que combinar dados de diferentes períodos ou níveis de agregação pode produzir conclusões equivocadas.
 
-O projeto também ampliou minha compreensão sobre processamento em nuvem, organização em camadas e documentação de dados. As três perguntas analíticas foram respondidas dentro do recorte definido, com registro das limitações dos indicadores.
-
-Como pontos de evolução, permanecem a automatização da execução do pipeline e o aprofundamento das análises de atraso por região e vendedor, considerando possíveis diferenças entre os grupos.
+As três perguntas analíticas foram respondidas dentro do recorte definido, com registro das limitações dos indicadores. Como pontos de evolução, permanecem a automatização da execução do pipeline e o aprofundamento das análises de atraso por região e vendedor, considerando possíveis diferenças entre os grupos.
