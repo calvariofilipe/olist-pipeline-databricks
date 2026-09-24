@@ -138,7 +138,7 @@ A execução é manual e sequencial. As gravações utilizam `overwrite`, substi
 
 1. Obter os oito CSVs na fonte indicada e manter seus nomes originais.
 2. Utilizar um workspace Databricks com Unity Catalog e recursos de execução compatíveis com os notebooks. São necessárias permissões para criar e utilizar catálogo, esquemas, volume e tabelas, além de registrar comentários.
-3. Preparar o ambiente. Em uma célula SQL do Databricks, executar:
+3. Preparar o ambiente executando o conteúdo de [00_preparacao_ambiente.sql](./00_preparacao_ambiente.sql) em uma célula SQL do Databricks. Os comandos também estão reproduzidos abaixo:
 
 ```sql
 CREATE CATALOG IF NOT EXISTS olist_mvp;
@@ -185,13 +185,13 @@ Os notebooks apresentam também as verificações com zero ocorrências. Nenhum 
 
 ## 6. Análise de Dados
 
-### Evolução mensal
+### (Questão 1) Como evoluíram os pedidos e o valor dos itens vendidos por mês?
 
 Ao longo de 2017, houve crescimento no número de pedidos entregues e no valor dos itens vendidos. Novembro teve o maior volume mensal do recorte: **7.289 pedidos** e **R$ 987.765,37** em itens, sem frete. Em 2018, os volumes oscilaram em patamar superior ao início de 2017, sem crescimento contínuo.
 
 O pico motiva investigar campanhas comerciais, mas não permite atribuir o resultado a uma campanha específica nem comprovar sazonalidade. A série de pedidos entregues vai de setembro de 2016 a agosto de 2018; os poucos registros de 2016 e a cobertura parcial de 2018 limitam comparações anuais. Meses sem registros são representados como lacunas no gráfico.
 
-### Participação das categorias
+### (Questão 2) Quais categorias apresentaram maior valor de itens vendidos e qual sua participação no total?
 
 O valor total dos itens vendidos em pedidos entregues foi de **R$ 13.221.498,11**, sem frete.
 
@@ -207,7 +207,7 @@ Os percentuais conjuntos foram calculados a partir dos valores monetários, ante
 
 O ranking orienta o acompanhamento comercial, mas não identifica lucratividade. Um pedido pode conter itens de diferentes categorias; por isso, suas contagens por categoria não são aditivas.
 
-### Pontualidade e avaliações
+### (Questão 3) Como as notas das avaliações se relacionam com os atrasos nas entregas?
 
 Dos **96.478 pedidos entregues**, **96.281** foram incluídos na análise de pontualidade. Os **197 excluídos** tinham datas ausentes ou inconsistentes e permanecem na Silver.
 
