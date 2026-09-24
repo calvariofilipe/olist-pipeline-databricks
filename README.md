@@ -1,6 +1,6 @@
 # Olist: pipeline de dados e análise de vendas no Databricks
 
-**Autor:** Filipe Calvario  
+**Autor:** Filipe Ferreira Calvario  
 **Curso:** Pós-graduação em Ciência de Dados e Analytics — PUC-Rio  
 **Projeto:** MVP de Engenharia de Dados
 
