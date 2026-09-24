@@ -4,21 +4,49 @@
 **Curso:** Pós-graduação em Ciência de Dados e Analytics — PUC-Rio  
 **Projeto:** MVP de Engenharia de Dados
 
-Pipeline em Python e PySpark que transforma oito arquivos CSV em tabelas Delta nas camadas Bronze, Silver e Gold. O projeto combina diagnóstico de qualidade, tratamento, documentação e análise de vendas e entregas em ambiente de nuvem.
+Este projeto desenvolve um pipeline de dados em Python e PySpark no Databricks, utilizando oito arquivos CSV do conjunto público de comércio eletrônico da Olist. O objetivo é transformar registros de clientes, pedidos, itens, pagamentos, avaliações, produtos e vendedores em informações organizadas e adequadas à análise de vendas e entregas.
 
-Entre os resultados, os pedidos entregues no prazo apresentaram nota média de **4,29**, contra **2,27** nos pedidos atrasados. As dez categorias com maior valor de itens vendidos concentraram **62,43%** do total analisado.
+O processamento está estruturado em três camadas: **Bronze**, que preserva os dados recebidos e registra sua origem; **Silver**, que padroniza os campos, converte os tipos e verifica a qualidade dos registros; e **Gold**, que reúne os indicadores utilizados nas análises. As tabelas são armazenadas em formato Delta, e suas descrições são registradas no catálogo do Databricks.
+
+Além da construção do pipeline, o trabalho examina como as características dos dados influenciam os resultados. Campos ausentes, datas inconsistentes e diferenças entre as unidades de registro exigem decisões explícitas de tratamento e agregação. Por isso, os notebooks apresentam os procedimentos adotados, os diagnósticos encontrados e as interpretações dos resultados, permitindo acompanhar o caminho entre os arquivos de origem e os indicadores finais.
+
+A análise aborda três aspectos do negócio: a evolução mensal das vendas, a participação das categorias de produtos e a relação entre pontualidade das entregas e avaliações dos clientes. Entre os resultados, os pedidos entregues no prazo apresentaram nota média de **4,29**, contra **2,27** nos pedidos atrasados. As dez categorias com maior valor de itens vendidos concentraram **62,43%** do total analisado.
+
+Esses resultados são interpretados dentro dos limites da base histórica e dos critérios de inclusão adotados. O projeto busca demonstrar tanto a construção de uma base analítica rastreável quanto o cuidado necessário para comunicar o significado dos indicadores.
 
 ## 1. Contexto de Negócios e Perguntas
 
-O acompanhamento de um comércio eletrônico exige combinar informações de pedidos, produtos, pagamentos e entregas. Como essas informações possuem diferentes granularidades, associações inadequadas podem duplicar valores e produzir indicadores enganosos.
+Em um comércio eletrônico, acompanhar o desempenho comercial envolve mais do que contar pedidos ou somar valores vendidos. É necessário compreender quando as compras ocorreram, quais produtos contribuíram para as vendas e como a experiência de entrega se relacionou com a avaliação dos clientes. Essas perspectivas permitem identificar padrões e formular questões para investigações posteriores.
 
-O objetivo deste projeto é construir uma base analítica rastreável para acompanhar o desempenho comercial e investigar sua relação com a experiência do cliente. As perguntas são:
+As informações necessárias estão distribuídas em tabelas com diferentes unidades de registro, ou granularidades. Um pedido pode conter vários itens, possuir mais de um registro de pagamento e estar associado a múltiplas avaliações. Combinar essas tabelas diretamente, sem considerar suas relações, pode multiplicar registros e distorcer somas, contagens e médias.
 
-1. Como evoluíram os pedidos e o valor dos itens vendidos por mês?
-2. Quais categorias apresentaram maior valor de itens vendidos e qual sua participação no total?
-3. Como as notas das avaliações se relacionam com os atrasos nas entregas?
+A qualidade dos dados também interfere na interpretação. Uma data de entrega ausente pode estar relacionada a um pedido ainda não entregue ou a uma inconsistência de preenchimento. Da mesma forma, a ausência de comentário em uma avaliação não significa que sua nota esteja indisponível. O tratamento precisa considerar o significado dos campos e a finalidade de cada análise, evitando exclusões ou preenchimentos sem justificativa.
 
-As análises consideram pedidos com status `delivered`. O valor dos itens corresponde à soma de `price`, sem frete, e **não representa receita líquida ou lucro da Olist**. A comparação de avaliações é descritiva e não demonstra causalidade.
+Nesse contexto, o objetivo do projeto é construir uma base analítica rastreável para acompanhar o desempenho comercial e investigar sua relação com a experiência do cliente. A organização em camadas permite preservar os registros de origem, documentar as transformações e aplicar critérios específicos na construção dos indicadores.
+
+### Perguntas de negócio
+
+**1. Como evoluíram os pedidos e o valor dos itens vendidos por mês?**
+
+A análise mensal busca identificar mudanças no volume de pedidos e no valor dos itens vendidos ao longo do período disponível. A observação conjunta dessas medidas ajuda a avaliar se suas trajetórias são semelhantes e a localizar meses que mereçam investigação. Picos ou quedas podem motivar análises adicionais, mas não permitem, isoladamente, atribuir causas a campanhas, sazonalidade ou mudanças na operação.
+
+**2. Quais categorias apresentaram maior valor de itens vendidos e qual sua participação no total?**
+
+A comparação entre categorias busca compreender a distribuição do valor vendido e seu grau de concentração. Esse recorte permite identificar quais grupos de produtos têm maior expressão comercial na base e orientar o acompanhamento de seu desempenho. O ranking, entretanto, não mede lucratividade, pois não incorpora custos, comissões ou margens.
+
+**3. Como as notas das avaliações se relacionam com os atrasos nas entregas?**
+
+A comparação entre pedidos entregues no prazo e com atraso investiga a associação entre pontualidade e avaliação do cliente. A análise pode indicar a relevância de aprofundar o acompanhamento das entregas, mas não isola o efeito do atraso: características dos produtos, vendedores, regiões e outros fatores também podem influenciar as notas.
+
+### Escopo e critérios de interpretação
+
+As análises consideram pedidos com status `delivered`. Dessa forma, os resultados descrevem o recorte de pedidos entregues, sem abranger o desempenho de pedidos cancelados ou de outras situações operacionais.
+
+O valor dos itens vendidos corresponde à soma de `price`, sem frete, e **não representa receita líquida ou lucro da Olist**. Na evolução mensal, os pedidos são agrupados pelo mês de realização da compra. Na análise por categoria, um mesmo pedido pode contribuir para mais de uma categoria quando contém produtos de grupos diferentes; por isso, as contagens de pedidos por categoria não devem ser somadas como se fossem pedidos distintos.
+
+A comparação de pontualidade utiliza apenas pedidos com as datas necessárias preenchidas e cronologicamente consistentes. Quando há mais de uma avaliação válida para um pedido, calcula-se primeiro sua nota média, de modo que cada pedido avaliado tenha o mesmo peso na comparação.
+
+A relação entre atraso e nota é **descritiva e não demonstra causalidade**. Os resultados se referem ao conjunto histórico disponibilizado pela Olist e não devem ser generalizados automaticamente para todo o comércio eletrônico brasileiro ou para o cenário atual.
 
 ## 2. Carga dos Dados
 
