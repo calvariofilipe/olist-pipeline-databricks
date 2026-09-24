@@ -79,11 +79,11 @@ O [catálogo de dados](./04_catálogo_dados.ipynb) documenta as **19 tabelas e 1
 As capturas abaixo exemplificam a documentação da tabela
 `olist_mvp.gold.vendas_por_categoria` no catálogo do Databricks.
 
-![Descrição da tabela vendas_por_categoria](catalogo_gold_descricao.png)
+![Descrição da tabela vendas_por_categoria](catálogo_gold_descricao.png)
 
 *Descrição da tabela, origem dos dados e critérios dos indicadores.*
 
-![Documentação das colunas da tabela vendas_por_categoria](catalogo_gold_colunas.png)
+![Documentação das colunas da tabela vendas_por_categoria](catálogo_gold_colunas.png)
 
 *Definições das cinco colunas e observações sobre o cálculo dos indicadores.*
 
