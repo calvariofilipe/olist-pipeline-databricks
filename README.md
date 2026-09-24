@@ -51,6 +51,10 @@ Na Bronze, a inferência de tipos é desativada e os campos de origem permanecem
 
 A modelagem preserva as entidades e suas granularidades nas camadas Bronze e Silver. A Gold contém três tabelas agregadas, orientadas às perguntas analíticas. Não foi implementado um esquema estrela.
 
+![Catálogo olist_mvp no Databricks](./olist_mvp.png)
+
+*Catálogo do projeto no Databricks, com os esquemas Bronze, Silver e Gold.*
+
 | Tabela Bronze/Silver | Granularidade | Chave observada |
 |---|---|---|
 | customers | Cadastro associado ao pedido | customer_id |
