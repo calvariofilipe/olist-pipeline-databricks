@@ -12,8 +12,6 @@ Além da construção do pipeline, o trabalho examina como as características d
 
 A análise aborda três aspectos do negócio: a evolução mensal das vendas, a participação das categorias de produtos e a relação entre pontualidade das entregas e avaliações dos clientes. Entre os resultados, os pedidos entregues no prazo apresentaram nota média de **4,29**, contra **2,27** nos pedidos atrasados. As dez categorias com maior valor de itens vendidos concentraram **62,43%** do total analisado.
 
-Esses resultados são interpretados dentro dos limites da base histórica e dos critérios de inclusão adotados. O projeto busca demonstrar tanto a construção de uma base analítica rastreável quanto o cuidado necessário para comunicar o significado dos indicadores.
-
 ## 1. Contexto de Negócios e Perguntas
 
 Em um comércio eletrônico, acompanhar o desempenho comercial envolve mais do que contar pedidos ou somar valores vendidos. É necessário compreender quando as compras ocorreram, quais produtos contribuíram para as vendas e como a experiência de entrega se relacionou com a avaliação dos clientes. Essas perspectivas permitem identificar padrões e formular questões para investigações posteriores.
@@ -22,7 +20,7 @@ As informações necessárias estão distribuídas em tabelas com diferentes uni
 
 A qualidade dos dados também interfere na interpretação. Uma data de entrega ausente pode estar relacionada a um pedido ainda não entregue ou a uma inconsistência de preenchimento. Da mesma forma, a ausência de comentário em uma avaliação não significa que sua nota esteja indisponível. O tratamento precisa considerar o significado dos campos e a finalidade de cada análise, evitando exclusões ou preenchimentos sem justificativa.
 
-Nesse contexto, o objetivo do projeto é construir uma base analítica rastreável para acompanhar o desempenho comercial e investigar sua relação com a experiência do cliente. A organização em camadas permite preservar os registros de origem, documentar as transformações e aplicar critérios específicos na construção dos indicadores.
+Nesse contexto, o objetivo do projeto é construir uma base analítica rastreável para acompanhar o desempenho comercial e investigar sua relação com a experiência do cliente.
 
 ### Perguntas de negócio
 
@@ -224,6 +222,24 @@ Quando há várias avaliações válidas para um pedido, calcula-se primeiro a m
 
 O resultado indica associação entre atraso e avaliações menores. Categoria, vendedor, região e outros fatores podem influenciar ambos; a comparação não estabelece causalidade. As médias também não revelam toda a distribuição das notas.
 
+### Discussão dos resultados
+
+Os resultados permitem examinar o desempenho comercial sob três perspectivas complementares: sua evolução no tempo, a distribuição do valor vendido entre categorias e a experiência dos clientes em relação às entregas. A leitura conjunta mostra por que o acompanhamento de vendas deve incluir tanto indicadores comerciais quanto operacionais.
+
+A trajetória mensal observada sugere que a operação representada na base passou a atender um volume maior de pedidos em comparação com o início de 2017. Entretanto, a trajetória não foi de crescimento contínuo, e o pico de novembro não deve ser tratado como um nível permanente de demanda. Para o planejamento operacional, esse resultado motiva investigar a capacidade de processamento e entrega nos períodos de maior movimento.
+
+A análise por categoria acrescenta uma informação que os totais mensais não mostram: o valor vendido está distribuído de maneira desigual entre os grupos de produtos. Existe, portanto, concentração em um conjunto de categorias, mas nenhuma das três primeiras responde individualmente por mais de 10% do valor analisado. Isso indica que o acompanhamento comercial deve considerar vários grupos relevantes, em vez de se limitar a uma única categoria dominante.
+
+Essa distribuição pode orientar a priorização de análises de disponibilidade de produtos, desempenho de vendedores e cumprimento dos prazos nas categorias de maior participação. Contudo, maior valor vendido não significa necessariamente maior eficiência ou rentabilidade. Para avaliar esses aspectos, seriam necessárias informações adicionais sobre custos, margens, cancelamentos e devoluções.
+
+Na análise das entregas, os atrasos atingem uma parcela minoritária dos pedidos elegíveis, mas estão associados a notas médias expressivamente menores. Assim, a predominância de entregas pontuais não elimina a relevância de investigar o grupo com atraso.
+
+Do ponto de vista gerencial, esse resultado justifica aprofundar a investigação dos atrasos e acompanhar sua frequência, duração e distribuição por vendedor, região e categoria. Ele não permite afirmar que eliminar os atrasos elevaria automaticamente as notas em 2,02 pontos, pois outros fatores podem contribuir para a diferença observada. Também não permite concluir que o atraso tenha ocorrido antes da avaliação em todos os casos, já que essa sequência não foi analisada.
+
+A combinação dos achados aponta para uma próxima pergunta: os períodos e as categorias de maior volume comercial também apresentam maior incidência de atrasos? As análises realizadas ainda não respondem a essa questão, pois cada dimensão foi examinada separadamente. Cruzá-las permitiria investigar se a expansão das vendas é acompanhada de mudanças no desempenho das entregas e nas avaliações.
+
+O principal valor da base construída é permitir esse aprofundamento com critérios explícitos e dados rastreáveis. Os indicadores atuais identificam padrões e ajudam a direcionar novas investigações; decisões operacionais exigiriam análises mais detalhadas e informações atualizadas.
+
 ### Limitações e continuidade
 
 As três perguntas foram respondidas para o recorte definido. Os resultados representam pedidos entregues na base histórica e não todo o comércio eletrônico brasileiro. Não foram estimados lucro, receita líquida ou efeitos causais.
@@ -232,7 +248,7 @@ Como continuidade, propõe-se investigar atrasos por região e vendedor, compara
 
 ## 7. Autoavaliação
 
-Uma das principais dificuldades foi definir critérios de tratamento que permitissem construir indicadores consistentes sem descartar informações potencialmente úteis. A presença de campos ausentes, datas inconsistentes e identificadores de avaliações repetidos exigiu considerar o significado de cada registro antes de decidir como utilizá-lo.
+Uma das principais dificuldades foi definir critérios de tratamento que permitissem construir indicadores consistentes sem descartar informações potencialmente úteis. A presença de campos ausentes, datas inconsistentes e repetições de `review_id` em registros distintos exigiu considerar o significado de cada registro antes de decidir como utilizá-lo.
 
 A abordagem adotada foi preservar os dados de origem na Bronze, aplicar padronizações e conversões na Silver e explicitar os critérios de inclusão nas análises da Gold. Esse processo reforçou que identificar uma inconsistência não implica necessariamente excluir o registro: a decisão depende da finalidade da análise.
 
